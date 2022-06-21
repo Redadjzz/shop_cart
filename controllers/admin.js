@@ -8,7 +8,7 @@ const getIndex = (req, res) => {
             admin: true,
             isAdmin: req.cookies.isAdmin,
             userLogin: req.cookies.userLogin
-    })
+        })
     }
 
 }

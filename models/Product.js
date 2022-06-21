@@ -26,6 +26,15 @@ class Product {
 
     save(callback) {
         this.id = uuidv4()
+        getProductsFromFile(product => {
+            product.push(this)
+            fs.writeFile(p, JSON.stringify(products), err => {
+                if (err) console.log(err)
+                callback()
+
+            })
+        })
+
         fs.readFile(p, (err, fileContent) => {
             let products = []
             if (!err) {
@@ -36,11 +45,7 @@ class Product {
 
 
 
-            fs.writeFile(p, JSON.stringify(products), err => {
-                if (err) console.log(err)
-                callback()
 
-            })
         })
     }
 
@@ -52,8 +57,8 @@ class Product {
 
     static findById(id, callback) {
         getProductsFromFile(product => {
-            // const product = products.find(prod => prod.id == id)
-            // callback(product)
+            const product = products.find(prod => prod.id == id)
+            callback(product)
         })
     }
 }
