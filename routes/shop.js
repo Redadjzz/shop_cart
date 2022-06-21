@@ -13,4 +13,5 @@ router.get('/panier', shopController.getCart)
 router.get('/login', shopController.login)
 router.get('/logout', shopController.logout)
 
+
 module.exports = router
