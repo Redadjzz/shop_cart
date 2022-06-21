@@ -1,0 +1,25 @@
+extends layout 
+
+block content 
+        
+        .jumbotron
+            h1.display-4 Collecty'Form 
+            p.lead Connectez-vous !
+        .row
+          .col-sm-6
+            div is Authenticated : #{authenticated}
+          .col-sm-6
+            div is Admin : #{isAdmin}
+          .col-sm-6
+            div Login : #{userLogin}
+        .row
+          .col-sm-6
+            form(method="GET")
+              label(for='login') Login :
+              input.text(name='login', id='login', value=query.login)
+              br
+              label(for='password') Password :
+              input.password(name='password', id='password')
+              br
+              button(type="submit").btn.btn-primary Se Connecter
+                

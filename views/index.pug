@@ -1,0 +1,32 @@
+extends layout 
+
+block content 
+        
+        .jumbotron
+            h1.display-4 Collecty'Form 
+            p.lead Bienvenue !
+        .row
+          .col-sm-6
+            form()
+              input.text(name='color', value=query.color)
+              button(type="submit").btn.btn-primary Couleur
+          .col-sm-6
+            form()
+              input.text(name='minPrice', value=query.minPrice)
+              input.text(name='maxPrice', value=query.maxPrice)
+              button(type="submit").btn.btn-primary Price
+        .row 
+          each product in products
+              .col-sm-6.col-md-4
+                .card 
+                  img(src=product.image, alt=product.name).card-img-top 
+                  .card-body
+                    h3.card-title= product.name
+                    h5
+                      | Prix : 
+                      span.badge.badge-pill.badge.dark #{product.price} #{product.currency}
+                      span #{product.color}
+                    hr
+                    a(href="/produit/"+product.id).btn.btn-outline-dark.btn-sm Voir le produit
+
+                

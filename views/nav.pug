@@ -1,0 +1,36 @@
+nav.navbar.navbar-expand-lg.mb-4(style="background-color:#28023C")
+  .container-fluid
+    if admin
+      a.navbar-brand(href="/admin" )
+        img(src='http://localhost:3000/images/Collectyy.png' width="250" height="50" alt)
+    else
+      a.navbar-brand(href='/' )
+        img(src='http://localhost:3000/images/Collectyy.png' width="250" height="50" alt)
+    
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    .collapse.navbar-collapse#navbarNav
+    if admin 
+        .ml-auto 
+          a.nav-item.nav-link(href='/' style='color:white;').float-left Shop
+    else 
+      ul.navbar-nav
+        li.nav-item
+          a.nav-link(aria-current='page' href='/' style='color:white', class=(path === '/' ? 'active' : '' )) Home
+        li.nav-item
+          a.nav-link(href='/panier' style='color:white', class=(path === '/panier' ? 'active' : '' )) Panier
+        if (userLogin)
+          li.nav-item
+            a.nav-item.nav-link(href='/logout' style='color:white;').float-left Se Déconnecter 
+        break
+        if (!userLogin)
+          li.nav-item
+            a.nav-link(href='/login' style='color:white', class=(path === '/panier' ? 'active' : '' )) Se Connecter
+        break
+        if (isAdmin && isAdmin == "true")
+          .ml-auto
+            a.nav-item.nav-link(href='/admin' style='color:white;').float-left Admin 
+        break
+
+
+

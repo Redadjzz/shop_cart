@@ -1,0 +1,12 @@
+[
+    {
+        "login": "marc",
+        "password": "test",
+        "admin": true
+    },
+    {
+        "login": "reda",
+        "password": "test",
+        "admin": false
+    }
+]
