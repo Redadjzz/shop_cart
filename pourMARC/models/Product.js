@@ -50,6 +50,9 @@ class Product {
 
             products.push(this)
 
+
+
+
         })
     }
 
@@ -65,8 +68,6 @@ class Product {
             callback(product)
         })
     }
-
-
 }
 
 module.exports = Product

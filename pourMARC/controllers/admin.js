@@ -1,15 +1,17 @@
 const Product = require('../models/Product')
 
 const getIndex = (req, res) => {
-    res.render('admin', {
-        title: 'Admin',
-        admin: true,
-        isAdmin: req.cookies.isAdmin,
-        userLogin: req.cookies.userLogin
-    })
+    if (req.cookies.isAdmin, req.cookies.userLogin != true) res.redirect('/')
+    else {
+        res.render('admin', {
+            title: 'Admin',
+            admin: true,
+            isAdmin: req.cookies.isAdmin,
+            userLogin: req.cookies.userLogin
+        })
+    }
+
 }
-
-
 
 const postIndex = (req, res) => {
     const { name, description, image, price, color, size, type, garment, equipment, typeGarment } = req.body
