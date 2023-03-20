@@ -1,0 +1,63 @@
+- hosts: app
+  become: yes
+  remote_user: administrateur
+
+  tasks:
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+
+    - name: Install docker-compose
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: Clone Git repository
+      git:
+        repo: https://gitlab.com/Milo_Roche_Vdb/devops_mikoto.git
+        dest: mikoto/
+
+    - name: Transfer script
+      copy:
+        src: stop-container-if-exists.sh
+        dest: /home/administrateur/
+
+    - name: CHMOD 644
+      command: 
+        chdir: /home/administrateur/
+        cmd: chmod +x stop-container-if-exists.sh
+      
+    - name: Stop previously started Docker
+      command: 
+        chdir: /home/administrateur/
+        cmd: ./stop-container-if-exists.sh mikoto
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Create Nginx configuration file
+      template:
+        src: nginx-template.j2
+        dest: /etc/nginx/sites-available/default
+        mode: '0644'
+      notify:
+        - Restart Nginx
+
+    - name: Build Docker image
+      command: 
+        chdir: /home/administrateur/mikoto/devops/Docker/Frontend/
+        cmd: docker-compose build -t mikoto --no-cache
+    
+    - name: Up Docker image
+      command: 
+        chdir: /home/administrateur/mikoto/devops/Docker/Frontend/
+        cmd: docker-compose up -d
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted

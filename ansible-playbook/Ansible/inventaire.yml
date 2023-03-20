@@ -1,0 +1,14 @@
+all:
+  children:
+    app:
+      hosts:
+        app_server:
+          ansible_host: 74.234.186.95
+    ghost:
+      hosts:
+        ghost_server:
+          ansible_host: 20.123.65.255
+    bdd:
+      hosts:
+        bdd_server:
+          ansible_host: 20.123.64.136
