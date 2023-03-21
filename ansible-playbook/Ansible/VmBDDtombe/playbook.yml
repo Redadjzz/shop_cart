@@ -15,8 +15,8 @@
 
     - name: Clone Git repository
       git:
-        repo: https://gitlab.com/Milo_Roche_Vdb/devops_mikoto.git
-        dest: mikoto/
+        repo: https://gitlab.com/RedaMESSI/shop_cart.git
+        dest: RedaMESSI/
 
     - name: Transfer script
       copy:
@@ -31,7 +31,7 @@
     - name: Stop previously started Docker
       command: 
         chdir: /home/administrateur/
-        cmd: ./stop-container-if-exists.sh mikoto-bdd
+        cmd: ./stop-container-if-exists.sh RedaMESSI-bdd
 
     - name: Install Nginx
       apt:
@@ -48,12 +48,12 @@
 
     - name: Build Docker image
       command: 
-        chdir: /home/administrateur/mikoto/devops/Docker/BDD/
-        cmd: docker-compose build -t mikoto-bdd
+        chdir: /home/administrateur/RedaMESSI/devops/Docker/BDD/
+        cmd: docker-compose build -t RedaMESSI-bdd
     
     - name: Up Docker image
       command: 
-        chdir: /home/administrateur/mikoto/devops/Docker/BDD/
+        chdir: /home/administrateur/RedaMESSI/devops/Docker/BDD/
         cmd: docker-compose up -d
 
   handlers:
